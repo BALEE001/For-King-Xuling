@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>和我做朋友吗？</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://c-ssl.duitang.com/uploads/blog/202307/12/n6SDgAOqT9wB3A3.jpeg');
+            background-size: auto 200px;
+            background-position: top center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff69b4;
+            text-shadow: 2px 2px 4px white;
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: capitalize;
+        }
+
+        #yesButton {
+            transition: all 0.3s;
+            padding: 20px 40px;
+            font-size: 24px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #noButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        #yesButton:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="question">可以和我做朋友吗？🐾</h1>
+    <button id="yesButton" onclick="accept()">可以！</button>
+    <button id="noButton" onmouseover="moveButton()" onclick="moveButtonAndChangeBg()">不可以...</button>
+
+    <script>
+        let scale = 1;
+        let isFirstClick = true;
+
+        function moveButton() {
+            const noButton = document.getElementById('noButton');
+            const maxX = window.innerWidth - noButton.offsetWidth;
+            const maxY = window.innerHeight - noButton.offsetHeight;
+
+            // 生成随机位置
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+
+            // 放大"可以"按钮
+            scale *= 1.2;
+            document.getElementById('yesButton').style.transform = `scale(${scale})`;
+        }
+
+        function moveButtonAndChangeBg() {
+            if (isFirstClick) {
+                isFirstClick = false;
+            } else {
+                moveButton();
+            }
+            const body = document.querySelector('body');
+            body.style.backgroundImage = `url('https://c-ssl.dtstatic.com/uploads/blog/202311/02/pGSp78m7SBm8eZM.thumb.1000_0.jpg')`;
+            body.style.backgroundSize = 'auto 200px';
+            body.style.backgroundPosition = 'top center';
+
+            const question = document.getElementById('question');
+            question.textContent = "真的不可以吗宝宝";
+        }
+
+        function accept() {
+            alert("好耶！❤️ 我们是最好的朋友啦～ (≧▽≦)");
+            // 重置按钮位置和大小
+            scale = 1;
+            document.getElementById('yesButton').style.transform = `scale(${scale})`;
+            document.getElementById('noButton').style.left = '';
+            document.getElementById('noButton').style.top = '';
+            const body = document.querySelector('body');
+            body.style.backgroundImage = `url('https://c-ssl.duitang.com/uploads/blog/202307/12/n6SDgAOqT9wB3A3.jpeg')`;
+            body.style.backgroundSize = 'auto 200px';
+            body.style.backgroundPosition = 'top center';
+            isFirstClick = true;
+
+            const question = document.getElementById('question');
+            question.textContent = "可以和我做朋友吗？🐾";
+        }
+    </script>
+</body>
+
+</html>
